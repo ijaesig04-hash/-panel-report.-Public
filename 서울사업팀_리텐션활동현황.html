@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22%EC%84%9C%EC%9A%B8%EC%82%AC%EC%97%85%ED%8C%80%20%EB%A6%AC%ED%85%90%EC%85%98%20%ED%99%9C%EB%8F%99%20%ED%98%84%ED%99%A9%22%2C%22short_name%22%3A%22%ED%8C%90%EB%84%A8%EB%A6%AC%ED%85%90%EC%85%98%22%2C%22description%22%3A%22%EC%84%9C%EC%9A%B8%EC%82%AC%EC%97%85%ED%8C%80%20%EC%A7%80%EC%82%AC%20%EA%B7%BC%EB%AC%B4%EC%9E%90%EC%9A%A9%20%ED%8C%90%EB%84%A8%2F%EC%8A%A4%ED%8B%B0%EC%BB%A4%20%EB%B6%80%EC%B0%A9%20%EA%B1%B4%EC%88%98%20%EC%A0%9C%EC%B6%9C%20%EB%B0%8F%20%EA%B4%80%EB%A6%AC%20%EC%95%B1%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23f2f5f9%22%2C%22theme_color%22%3A%22%230b2a5b%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%3D%2522http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%2522%2520viewBox%3D%25220%25200%2520192%2520192%2522%253E%253Crect%2520width%3D%2522192%2522%2520height%3D%2522192%2522%2520rx%3D%252232%2522%2520fill%3D%2522%25230b2a5b%2522%2F%253E%253Ctext%2520x%3D%252296%2522%2520y%3D%2522118%2522%2520font-size%3D%252272%2522%2520fill%3D%2522white%2522%2520text-anchor%3D%2522middle%2522%2520font-family%3D%2522sans-serif%2522%2520font-weight%3D%2522800%2522%253ES1%253C%2Ftext%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
+<meta charset="UTF-8">
+<meta name="color-scheme" content="light">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0b2a5b">
+<title>서울사업팀 리텐션 활동 현황</title>
+<style>
+  :root{
+  color-scheme: light only;
+    --navy:#0b2a5b; --blue:#1663d1; --sky:#eaf1fc;
+    --green:#0f9d58; --red:#d93025; --amber:#e8930c;
+    --ink:#1c2733; --sub:#66788c; --line:#dde5ef; --bg:#f2f5f9;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{color-scheme:light;margin:0;padding:0;background:var(--bg);color:var(--ink);
+    width:100%;min-height:100vh;overflow-x:hidden;
+    font-family:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif;}
+  .wrap{max-width:520px;margin:0 auto;padding:0 14px 90px;min-height:100vh;}
+  @media (max-width:560px){ .wrap{max-width:100%;} }
+  header{background:linear-gradient(135deg,#0b2a5b,#1663d1);color:#fff;
+    padding:20px 18px 16px;border-radius:0 0 18px 18px;margin:0 -14px 14px;
+    display:flex;align-items:center;gap:12px;}
+  header .logo{width:38px;height:38px;border-radius:9px;background:rgba(255,255,255,.16);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;flex:0 0 38px;}
+  header h1{margin:0;font-size:19px;letter-spacing:-.3px;}
+  header p{margin:5px 0 0;font-size:12.5px;opacity:.85;}
+  header.hero{position:relative;overflow:hidden;padding:0;}
+  header.hero::before{content:"";position:absolute;inset:0;
+    background-image:url('hero-banner.png');
+    background-size:cover;background-position:center right;opacity:.55;}
+  header.hero::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(100deg,rgba(11,42,91,.96) 0%,rgba(11,42,91,.82) 45%,rgba(22,99,209,.35) 100%);}
+  .hero-inner{position:relative;z-index:2;display:flex;align-items:center;gap:12px;padding:22px 18px 20px;}
+  .banner{position:relative;border-radius:14px;overflow:hidden;margin-bottom:12px;
+    border:1px solid var(--line);background:#0b2a5b;}
+  .banner img{display:block;width:100%;height:104px;object-fit:cover;opacity:.85;}
+  .banner .cap{position:absolute;left:14px;bottom:10px;color:#fff;font-size:13px;font-weight:700;
+    text-shadow:0 1px 6px rgba(0,0,0,.65);letter-spacing:-.2px;}
+  .banner.main{margin-bottom:14px;border:0;}
+  .banner.main img{height:auto;width:100%;object-fit:contain;opacity:1;}
+  .banner.illust{background:#eaf6fb;}
+  #carBanner{cursor:pointer;-webkit-user-select:none;user-select:none;}
+  #carBanner img{position:relative;z-index:1;}
+  #carBanner.siren img{animation:carshake .18s linear 8;}
+  @keyframes carshake{0%,100%{transform:translateX(0)}25%{transform:translateX(-2.5px)}75%{transform:translateX(2.5px)}}
+  .carfx{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;}
+  #carBanner.siren .carfx{animation:siren .42s steps(1) 4;}
+  @keyframes siren{
+    0%{opacity:1;background:radial-gradient(circle at 42% 34%,rgba(255,40,40,.62) 0%,rgba(255,40,40,.16) 34%,transparent 62%);}
+    50%{opacity:1;background:radial-gradient(circle at 58% 34%,rgba(40,90,255,.62) 0%,rgba(40,90,255,.16) 34%,transparent 62%);}
+    100%{opacity:0;background:transparent;}
+  }
+  .cartip{position:absolute;top:8px;right:10px;z-index:3;background:rgba(11,42,91,.72);color:#fff;
+    font-size:11px;font-weight:600;padding:4px 9px;border-radius:20px;pointer-events:none;transition:opacity .3s;}
+  #carBanner.siren .cartip{opacity:0;}
+
+  .chase-banner{position:relative;border-radius:14px;padding:10px 10px 28px;margin-bottom:12px;
+    overflow:hidden;border:1px solid var(--line);cursor:pointer;-webkit-user-select:none;user-select:none;
+    background:linear-gradient(180deg,#cfe2f7 0%,#e6effb 58%,#9aa7b8 58.5%,#7e8b9c 100%);}
+  .chase-banner::after{content:'';position:absolute;left:0;right:0;bottom:22px;height:1px;
+    background:repeating-linear-gradient(90deg,#f4f7fb 0 16px,transparent 16px 34px);opacity:.65;}
+  .chase-track{position:relative;height:74px;}
+  .chase-track .runner{position:absolute;bottom:0;left:-24%;width:70px;height:74px;
+    animation:chaseRun 3.6s linear infinite;will-change:left;}
+  .chase-track .runner.guard{animation-delay:.52s;}
+  .chase-track .runner svg{width:100%;height:100%;display:block;overflow:visible;}
+  .chase-track .runner .body{transform-origin:50% 94%;animation:runBob .46s ease-in-out infinite;}
+  .chase-track .runner.guard .body{animation-duration:.42s;}
+  .thighF,.thighB,.shinF,.shinB{transform-box:view-box;}
+  .thighF,.thighB{transform-origin:34px 41px;}
+  .shinF,.shinB{transform-origin:34px 53.5px;}
+  .thighF{animation:thighSwing .46s linear infinite;}
+  .thighB{animation:thighSwing .46s linear infinite; animation-delay:-.23s;}
+  .shinF{animation:shinSwing .46s linear infinite;}
+  .shinB{animation:shinSwing .46s linear infinite; animation-delay:-.23s;}
+  .guard .thighF,.guard .thighB,.guard .shinF,.guard .shinB{animation-duration:.42s;}
+  .guard .thighB,.guard .shinB{animation-delay:-.21s;}
+  .armF{transform-box:view-box;transform-origin:34px 25px;animation:armSwingF .46s linear infinite;}
+  .armB{transform-box:view-box;transform-origin:34px 25px;animation:armSwingB .46s linear infinite;}
+  .guard .armF,.guard .armB{animation-duration:.42s;}
+  .shadowEl{animation:shadowPulse .46s ease-in-out infinite;transform-origin:center;}
+  .guard .shadowEl{animation-duration:.42s;}
+  @keyframes chaseRun{ from{ left:-24%; } to{ left:104%; } }
+  @keyframes runBob{
+    0%{ transform:translateY(-1px) rotate(-1deg); }
+    25%{ transform:translateY(-6px) rotate(1deg); }
+    50%{ transform:translateY(-1px) rotate(-1deg); }
+    75%{ transform:translateY(-6px) rotate(1deg); }
+    100%{ transform:translateY(-1px) rotate(-1deg); }
+  }
+  @keyframes thighSwing{
+    0%{ transform:rotate(-30deg); }
+    25%{ transform:rotate(4deg); }
+    50%{ transform:rotate(34deg); }
+    75%{ transform:rotate(-16deg); }
+    100%{ transform:rotate(-30deg); }
+  }
+  @keyframes shinSwing{
+    0%{ transform:rotate(6deg); }
+    25%{ transform:rotate(-2deg); }
+    50%{ transform:rotate(4deg); }
+    75%{ transform:rotate(-78deg); }
+    100%{ transform:rotate(6deg); }
+  }
+  @keyframes armSwingF{
+    0%{ transform:rotate(34deg); } 50%{ transform:rotate(-30deg); } 100%{ transform:rotate(34deg); }
+  }
+  @keyframes armSwingB{
+    0%{ transform:rotate(-30deg); } 50%{ transform:rotate(34deg); } 100%{ transform:rotate(-30deg); }
+  }
+  @keyframes shadowPulse{
+    0%{ transform:scaleX(.82); opacity:.2;} 25%{ transform:scaleX(1); opacity:.28;}
+    50%{ transform:scaleX(.82); opacity:.2;} 75%{ transform:scaleX(1); opacity:.28;}
+    100%{ transform:scaleX(.82); opacity:.2;}
+  }
+  .speedline{animation:speedFade .42s linear infinite;}
+  .speedline.s2{animation-delay:.14s;}
+  .speedline.s3{animation-delay:.28s;}
+  @keyframes speedFade{ 0%{opacity:.55;transform:translateX(4px) scaleX(.6);} 100%{opacity:0;transform:translateX(-22px) scaleX(1.5);} }
+  .dust{animation:dustPuff .55s ease-out infinite;transform-origin:center;}
+  .dust.d2{animation-delay:.18s;}
+  .dust.d3{animation-delay:.36s;}
+  @keyframes dustPuff{ 0%{opacity:.5;transform:translate(0,0) scale(.5);} 100%{opacity:0;transform:translate(-20px,-6px) scale(1.5);} }
+  .siren-l{animation:sirenL .28s steps(1) infinite;}
+  @keyframes sirenL{ 0%{fill:#ff4d42;} 50%{fill:#3b82f6;} 100%{fill:#ff4d42;} }
+  .sirenGlow{animation:sirenGlowA .28s steps(1) infinite;}
+  @keyframes sirenGlowA{ 0%{fill:#ff4d42;opacity:.35;} 50%{fill:#3b82f6;opacity:.35;} 100%{fill:#ff4d42;opacity:.35;} }
+  .chase-banner.caught .runner,.chase-banner.caught .body,
+  .chase-banner.caught .thighF,.chase-banner.caught .thighB,
+  .chase-banner.caught .shinF,.chase-banner.caught .shinB,
+  .chase-banner.caught .armF,.chase-banner.caught .armB,
+  .chase-banner.caught .dust,.chase-banner.caught .speedline,
+  .chase-banner.caught .shadowEl{animation-play-state:paused;}
+  .chase-caught-msg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    background:rgba(255,255,255,.93);font-size:15px;font-weight:800;color:var(--navy);
+    opacity:0;pointer-events:none;transition:opacity .2s;}
+  .chase-banner.caught .chase-caught-msg{opacity:1;}
+  .chase-tip{position:absolute;left:0;right:0;bottom:5px;text-align:center;font-size:11px;color:#3f4b5b;opacity:.75;}
+  .banner.illust img{height:auto;width:100%;object-fit:cover;opacity:1;}
+  .banner.illust .cap{position:static;padding:8px 12px 10px;color:var(--navy);text-shadow:none;
+    text-align:center;background:#eaf6fb;}
+  .banner.illust .cap small{color:var(--sub);opacity:1;}
+  .banner .cap small{display:block;font-size:11px;font-weight:400;opacity:.85;margin-top:2px;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;
+    padding:16px 14px;margin-bottom:12px;box-shadow:0 1px 3px rgba(16,42,91,.05);}
+  .card h2{margin:0 0 12px;font-size:14.5px;color:var(--navy);display:flex;align-items:center;gap:6px;}
+  .card h2 .num{background:var(--navy);color:#fff;width:20px;height:20px;border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;font-size:11.5px;flex:0 0 20px;}
+  .row2{display:flex;gap:8px;}
+  .row2>div{flex:1;}
+  label{display:block;font-size:12px;color:var(--sub);margin:10px 2px 4px;font-weight:600;}
+  input[type=text],input[type=number],input[type=password],input[type=date],select{
+    width:100%;padding:12px;border:1.5px solid var(--line);border-radius:10px;
+    font-size:16px;background:#fbfcfe;color:var(--ink);outline:none;}
+  input:focus,select:focus{border-color:var(--blue);background:#fff;}
+  .photos{display:flex;gap:10px;}
+  .ph{flex:1;aspect-ratio:1/1;border:1.8px dashed #b9c8dd;border-radius:12px;background:var(--sky);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    color:var(--blue);font-size:13px;font-weight:600;position:relative;overflow:hidden;}
+  .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .ph .del{position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;
+    background:rgba(0,0,0,.55);color:#fff;border:0;font-size:14px;line-height:1;z-index:2;}
+  .ph .ico{font-size:26px;}
+  .hint{font-size:11.5px;color:var(--sub);margin-top:8px;}
+  .ai-status{font-size:12px;padding:9px 11px;border-radius:9px;background:var(--sky);
+    color:var(--navy);margin-bottom:10px;line-height:1.5;}
+  .ai-status.err{background:#fdeceb;color:var(--red);}
+  .ai-status.ok{background:#e7f6ec;color:#0a7a43;}
+  .prog{height:6px;background:#e2e9f3;border-radius:4px;overflow:hidden;margin-top:6px;display:none;}
+  .prog i{display:block;height:100%;width:0;background:var(--blue);transition:width .3s;}
+  .btn{width:100%;padding:15px;border:0;border-radius:12px;font-size:16px;font-weight:700;}
+  .btn-main{background:var(--navy);color:#fff;box-shadow:0 3px 10px rgba(11,42,91,.25);}
+  .btn-main:disabled{background:#aab8cc;box-shadow:none;}
+  .btn-line{background:#fff;color:var(--navy);border:1.5px solid var(--navy);margin-top:8px;}
+  .field-err{font-size:12px;color:var(--red);margin-top:4px;display:none;}
+  .airow{display:flex;align-items:center;gap:10px;padding:11px 10px;border:1.5px solid var(--line);
+    border-radius:11px;margin-bottom:8px;background:#fbfcfe;}
+  .airow .nm{flex:1;font-size:14px;font-weight:600;}
+  .airow .st{font-size:13.5px;font-weight:700;padding:6px 11px;border-radius:20px;background:#eef1f5;color:var(--sub);}
+  .airow.v-ok .st{background:#e7f6ec;color:var(--green);}
+  .airow.v-no .st{background:#fdeceb;color:var(--red);}
+  .airow.v-uk .st{background:#fdf3e3;color:var(--amber);}
+  .airow .conf{font-size:11px;color:var(--sub);}
+  .seg{display:flex;border:1.5px solid var(--line);border-radius:10px;overflow:hidden;}
+  .pickbtn{border:1.5px solid var(--line);border-radius:20px;padding:8px 14px;font-size:13px;font-weight:600;
+    color:var(--navy);background:#fbfcfe;}
+  .pickbtn.on{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .seg button{flex:1;padding:12px 4px;border:0;background:#fbfcfe;font-size:14px;color:var(--sub);}
+  .seg button.on{background:var(--blue);color:#fff;font-weight:700;}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:rgba(20,30,45,.92);
+    color:#fff;font-size:13px;padding:11px 18px;border-radius:24px;opacity:0;transition:opacity .3s;
+    pointer-events:none;z-index:99;white-space:nowrap;}
+  .toast.show{opacity:1;}
+  .tabs{display:flex;gap:8px;margin:0 0 12px;background:#fff;padding:6px;border:1px solid var(--line);border-radius:14px;position:sticky;top:6px;z-index:20;box-shadow:0 2px 8px rgba(16,42,91,.08);}
+  .tabbtn{flex:1;border:0;border-radius:10px;padding:12px 8px;background:#f2f5f9;color:var(--sub);font-weight:800;font-size:14px;}
+  .tabbtn.active{background:var(--navy);color:#fff;}
+  body.employee-mode #adminCard{display:none!important;}
+  body.admin-mode #employeeCards{display:none!important;}
+  #adminLockNote{display:none;background:#fff7e8;border:1px solid #f0d39a;color:#7a5200;border-radius:12px;padding:12px;font-size:12px;line-height:1.5;margin-bottom:12px;}
+  body.admin-mode #adminLockNote{display:block;}
+  .rec{border:1.5px solid var(--line);border-radius:11px;padding:10px 12px;margin-bottom:8px;background:#fbfcfe;display:flex;align-items:center;gap:10px;}
+  .rec .rt{flex:1;}
+  .rec .rt b{font-size:13.5px;}
+  .rec .rt span{display:block;font-size:12px;color:var(--sub);margin-top:2px;}
+  .rec .rc{font-size:15px;font-weight:800;color:var(--navy);}
+  .year-table{overflow:hidden;border:1px solid var(--line);border-radius:10px;}
+  .year-table table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:12px;}
+  .year-table th,.year-table td{padding:8px 3px;border-right:1px solid #eef2f7;border-bottom:1px solid #eef2f7;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .year-table th{background:#f2f5f9;color:var(--sub);font-weight:700;font-size:11.5px;}
+  .year-table th:first-child,.year-table td:first-child{width:34%;background:#fff;text-align:left;font-weight:700;padding-left:8px;}
+  .year-table th:first-child{background:#f2f5f9;}
+  .year-table .total{font-weight:800;background:#f7faff;}
+  .year-table .total td:first-child{background:#f7faff;}
+  .foot{text-align:center;font-size:11px;color:#9aa9bb;margin:18px 0 8px;line-height:1.6;}
+</style>
+</head>
+<body class="employee-mode">
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="logo">S1</div>
+      <div>
+        <h1>서울사업팀 리텐션 활동 현황</h1>
+        <p>북서울지사 · 사진 촬영 → 판넬/스티커 자동인식 → 건수 제출</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="tabs">
+    <button type="button" class="tabbtn active" id="tabEmployee">근무자용</button>
+    <button type="button" class="tabbtn" id="tabAdmin">관리자용</button>
+  </div>
+  <div id="adminLockNote">관리자 화면입니다. PIN으로 접속하면 지사별 집계와 CSV 내보내기를 볼 수 있습니다.</div>
+
+  <div id="employeeCards">
+    <div class="card" id="noticeCard" style="display:none;border-left:4px solid var(--blue);border-radius:0 12px 12px 0;">
+      <h2 style="margin:0 0 8px;"><i class="ti" style="font-style:normal;">📌</i> 공지사항</h2>
+      <img src="smart-security-banner.png" alt="S1 에스원 스마트 시큐리티" style="width:100%;border-radius:10px;display:block;margin-bottom:10px;">
+      <div id="noticeBody" style="font-size:13.5px;line-height:1.7;color:var(--ink);white-space:pre-wrap;"></div>
+      <div id="noticeMeta" style="font-size:11px;color:var(--sub);margin-top:8px;"></div>
+    </div>
+
+    <div class="card">
+      <h2><span class="num">1</span>기본 정보</h2>
+      <label>지사명</label>
+      <select id="f_branch">
+        <option value="">지사 선택</option>
+      </select>
+      <div class="row2">
+        <div>
+          <label>근무자명</label>
+          <select id="f_nameSel"><option value="__manual__">직접 입력</option></select>
+          <input type="text" id="f_name" placeholder="이름 입력" style="margin-top:6px;">
+          <div id="myMonthStat" style="font-size:11.5px;color:var(--sub);margin-top:5px;"></div>
+        </div>
+        <div>
+          <label>계약처명</label>
+          <input type="text" id="f_place" placeholder="예) 군포초 본관">
+        </div>
+      </div>
+      <label>활동일자</label>
+      <input type="date" id="f_date">
+    </div>
+
+    <div class="card">
+      <h2><span class="num">2</span>판넬/스티커 부착 사진</h2>
+      <div class="photos">
+        <label class="ph" for="file0" id="ph0"><span class="ico">📷</span>부착 전</label>
+        <label class="ph" for="file1" id="ph1"><span class="ico">📷</span>부착 후</label>
+      </div>
+      <input type="file" id="file0" accept="image/*" capture="environment" hidden>
+      <input type="file" id="file1" accept="image/*" capture="environment" hidden>
+      <div class="hint">※ 부착 전/후 사진은 필수이며, 두 장을 모두 첨부해야 제출됩니다. "부착 후" 사진이 선명할수록 판넬/스티커 자동 구분 정확도가 올라갑니다.</div>
+      <div class="airow" id="row_type" style="margin-top:10px;">
+        <div class="nm">부착 종류 자동인식<span class="conf" id="conf_type"></span></div>
+        <div class="st" id="st_type">대기</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="num">3</span>부착 종류</h2>
+      <label>부착 종류 <span style="font-weight:400;color:var(--sub)">(자동인식, 수정 가능)</span></label>
+      <div class="seg" id="segType">
+        <button type="button" class="on" data-v="판넬">판넬</button>
+        <button type="button" data-v="스티커">스티커</button>
+      </div>
+      <div class="field-err" id="err_required">지사명·근무자명을 입력해 주세요.</div>
+    </div>
+
+    <button class="btn btn-main" id="btnSubmit">제출하기</button>
+
+    <div class="banner illust" id="carBanner" style="margin-top:16px;">
+      <div class="carfx" id="carFx" aria-hidden="true"></div>
+      <div class="cartip" id="carTip">터치해 보세요</div>
+      <img src="patrol-car-cartoon.png" alt="에스원 순찰차">
+      <div class="cap">현장을 달리는 우리 근무자들<small>오늘도 안전하게, 리텐션 활동 화이팅</small></div>
+    </div>
+
+    <div class="chase-banner" id="chaseBanner">
+      <div class="chase-track">
+        <span class="runner thief" id="chaseThief">
+          <svg viewBox="0 0 70 74" aria-hidden="true">
+            <defs>
+              <linearGradient id="tShirt" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#fdfefe"/><stop offset="1" stop-color="#cfd6e0"/>
+              </linearGradient>
+              <linearGradient id="tPants" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#4a5a72"/><stop offset="1" stop-color="#2b3344"/>
+              </linearGradient>
+              <linearGradient id="tSkin" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#ffd9b4"/><stop offset="1" stop-color="#eab087"/>
+              </linearGradient>
+              <linearGradient id="tBag" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#e3c178"/><stop offset="1" stop-color="#b8903f"/>
+              </linearGradient>
+            </defs>
+            <ellipse class="shadowEl" cx="34" cy="70" rx="17" ry="3.4" fill="#2b3a4d" opacity=".26"/>
+            <g fill="#e8eef6">
+              <rect class="speedline" x="-2" y="30" width="16" height="2.4" rx="1.2"/>
+              <rect class="speedline s2" x="-6" y="40" width="20" height="2.2" rx="1.1"/>
+              <rect class="speedline s3" x="-1" y="49" width="13" height="2" rx="1"/>
+            </g>
+            <ellipse class="dust" cx="16" cy="67" rx="5.5" ry="3" fill="#dfe6ee"/>
+            <ellipse class="dust d2" cx="9" cy="64" rx="4.5" ry="2.5" fill="#e7edf4"/>
+            <g class="body" transform="rotate(9 34 44)">
+              <g class="thighB">
+                <rect x="30.5" y="41" width="7" height="13.5" rx="3.5" fill="#33415a"/>
+                <g class="shinB">
+                  <rect x="30.8" y="53.5" width="6.4" height="12" rx="3.2" fill="#1c2534"/>
+                  <path d="M31 62.4h3.6c4.8 0 8.8 1.9 8.8 3.9 0 1-.8 1.6-2.2 1.6H31c-1.3 0-2.3-.9-2.3-2.1v-1.3c0-1.2 1-2.1 2.3-2.1z" fill="#0f151f"/>
+                </g>
+              </g>
+              <g class="armB">
+                <path d="M33 25c-2.6 3.4-5 6.4-7.4 9.6-1.2 1.6 1 3.4 2.5 2.1l7.1-6.3z" fill="url(#tSkin)"/>
+              </g>
+              <path d="M27.6 20.6h13.6c2.2 0 3.8 1.7 4.1 3.8l2.3 15.2c.3 2.2-1.3 4-3.5 4H27.2c-2.2 0-3.9-1.9-3.6-4.1l2-15.2c.3-2.1 1.9-3.7 4-3.7z" fill="url(#tShirt)"/>
+              <g stroke="#2b3648" stroke-width="3.6" stroke-linecap="round" opacity=".92">
+                <path d="M25.4 25.6h18.8"/><path d="M24.6 31.2h20.6"/><path d="M24 36.8h21.4"/>
+              </g>
+              <path d="M27.6 20.6h13.6c2.2 0 3.8 1.7 4.1 3.8l.5 3.3H23.6l.5-3.4c.3-2.1 1.9-3.7 4-3.7z" fill="#fff" opacity=".28"/>
+              <path d="M23.6 41.8h22.3l.2 1.2c.3 2.2-1.3 4-3.5 4H27.2c-2.2 0-3.9-1.9-3.6-4.1z" fill="#0f172a" opacity=".22"/>
+              <path d="M30 19.5h9v3.6h-9z" fill="#e3c9a8"/>
+              <circle cx="34.6" cy="12.6" r="9.4" fill="url(#tSkin)"/>
+              <path d="M25.4 12.4c0-5.4 4.2-9.6 9.2-9.6s9.2 4.2 9.2 9.6z" fill="#212b3b"/>
+              <path d="M25.4 12.4c0-5.4 4.2-9.6 9.2-9.6 1.4 0 2.7.3 3.9.9-4.6.8-8 5-8.4 8.7z" fill="#39465c"/>
+              <rect x="25.1" y="10.2" width="19" height="5.4" rx="2.7" fill="#1a2231"/>
+              <ellipse cx="30.4" cy="12.9" rx="2.5" ry="1.9" fill="#fff"/>
+              <ellipse cx="38.8" cy="12.9" rx="2.5" ry="1.9" fill="#fff"/>
+              <circle cx="31.2" cy="13.1" r="1.15" fill="#1f2937"/>
+              <circle cx="39.4" cy="13.1" r="1.15" fill="#1f2937"/>
+              <path d="M30.6 18.6q4 2.6 8 0" stroke="#c2845a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <path d="M43.4 14.6q2.4.6 3 2.6" stroke="#d9a279" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+              <g class="thighF">
+                <rect x="30.5" y="41" width="7" height="13.5" rx="3.5" fill="#3e4e69"/>
+                <g class="shinF">
+                  <rect x="30.8" y="53.5" width="6.4" height="12" rx="3.2" fill="#111827"/>
+                  <path d="M31 62.4h3.9c5.1 0 9.3 2 9.3 4.1 0 1-.8 1.7-2.3 1.7H31c-1.4 0-2.4-1-2.4-2.2v-1.4c0-1.2 1-2.2 2.4-2.2z" fill="#000"/>
+                </g>
+              </g>
+              <g class="armF">
+                <path d="M38 25c3 3 5.6 5.6 8.4 8.6 1.3 1.4-.6 3.6-2.2 2.5l-8-5.6z" fill="url(#tSkin)"/>
+                <g transform="translate(43,32) rotate(8)">
+                  <path d="M2 2h15c2.2 0 4 1.8 4 4v7c0 2.2-1.8 4-4 4H2c-2.2 0-4-1.8-4-4V6c0-2.2 1.8-4 4-4z" fill="url(#tBag)"/>
+                  <path d="M3 2q3.2-4.6 6.6-4.6T16.2 2" fill="none" stroke="#8a6a2c" stroke-width="2.2" stroke-linecap="round"/>
+                  <path d="M2 2h15c2.2 0 4 1.8 4 4v1.6H-2V6c0-2.2 1.8-4 4-4z" fill="#fff" opacity=".22"/>
+                  <text x="9.5" y="13" font-size="9" font-weight="800" fill="#6b511f" text-anchor="middle" font-family="sans-serif">₩</text>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </span>
+        <span class="runner guard" id="chaseGuard">
+          <svg viewBox="0 0 70 74" aria-hidden="true">
+            <defs>
+              <linearGradient id="gUni" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#c3e05a"/><stop offset="1" stop-color="#9bc93e"/>
+              </linearGradient>
+              <linearGradient id="gVest" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#1e4076"/><stop offset="1" stop-color="#0d2247"/>
+              </linearGradient>
+              <linearGradient id="gPants" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#1e4076"/><stop offset="1" stop-color="#0d2247"/>
+              </linearGradient>
+              <linearGradient id="gSkin" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#ffd9b4"/><stop offset="1" stop-color="#eab087"/>
+              </linearGradient>
+            </defs>
+            <ellipse class="shadowEl" cx="34" cy="70" rx="17" ry="3.4" fill="#2b3a4d" opacity=".26"/>
+            <g fill="#dbe8fb">
+              <rect class="speedline" x="-2" y="28" width="17" height="2.4" rx="1.2"/>
+              <rect class="speedline s2" x="-6" y="38" width="21" height="2.2" rx="1.1"/>
+              <rect class="speedline s3" x="-1" y="47" width="14" height="2" rx="1"/>
+            </g>
+            <ellipse class="dust" cx="16" cy="67" rx="5.5" ry="3" fill="#dfe6ee"/>
+            <ellipse class="dust d3" cx="9" cy="64" rx="4.5" ry="2.5" fill="#e7edf4"/>
+            <g class="body" transform="rotate(12 34 44)">
+              <g class="thighB">
+                <rect x="30.5" y="41" width="7" height="13.5" rx="3.5" fill="#16305c"/>
+                <g class="shinB">
+                  <rect x="30.8" y="53.5" width="6.4" height="12" rx="3.2" fill="#08132a"/>
+                  <path d="M31 62.4h3.6c4.8 0 8.8 1.9 8.8 3.9 0 1-.8 1.6-2.2 1.6H31c-1.3 0-2.3-.9-2.3-2.1v-1.3c0-1.2 1-2.1 2.3-2.1z" fill="#020814"/>
+                </g>
+              </g>
+              <g class="armB">
+                <path d="M33 25c-2.6 3.4-5 6.4-7.4 9.6-1.2 1.6 1 3.4 2.5 2.1l7.1-6.3z" fill="url(#gSkin)"/>
+              </g>
+              <path d="M27.6 20.6h13.6c2.2 0 3.8 1.7 4.1 3.8l2.3 15.2c.3 2.2-1.3 4-3.5 4H27.2c-2.2 0-3.9-1.9-3.6-4.1l2-15.2c.3-2.1 1.9-3.7 4-3.7z" fill="url(#gUni)"/>
+              <path d="M27.6 20.6h6.6l-.6 22.8h-6.4c-2.2 0-3.9-1.9-3.6-4.1l2-15.2c.3-2.1 1.9-3.7 4-3.7z" fill="#fff" opacity=".1"/>
+              <path d="M27.9 23.4c.3-1.6 1.5-2.8 3-2.8h1.9l1.8 4.6-2.9 3.4-3.4-2z" fill="url(#gVest)"/>
+              <path d="M41.2 23.4c-.3-1.6-1.5-2.8-3-2.8h-1.9l-1.8 4.6 2.9 3.4 3.4-2z" fill="url(#gVest)"/>
+              <path d="M28.7 25.2l-1.6 16.6c-.1 1 .3 1.8 1 2.3h4.4l-1.2-16.7z" fill="url(#gVest)"/>
+              <path d="M40.4 25.2l1.6 16.6c.1 1-.3 1.8-1 2.3h-4.4l1.2-16.7z" fill="url(#gVest)"/>
+              <path d="M34.6 20.6l-.6 22.8" stroke="#08132a" stroke-width="1.4" opacity=".55"/>
+              <rect x="26.6" y="25.4" width="8.4" height="6" rx="1.4" fill="#e8302a"/>
+              <text x="30.8" y="30.1" font-size="4.8" font-weight="800" fill="#fff" text-anchor="middle" font-family="sans-serif">S1</text>
+              <circle cx="40.6" cy="27.4" r="1.5" fill="#d7e2f2" opacity=".85"/>
+              <circle cx="40.6" cy="32.4" r="1.5" fill="#d7e2f2" opacity=".85"/>
+              <path d="M23.9 38.4h22.6l.5 3.4H23.4z" fill="#0b1f3f"/>
+              <rect x="32.4" y="37.8" width="5" height="4.6" rx="1" fill="#c9a44a"/>
+              <path d="M30 19.5h9v3.6h-9z" fill="#e3c9a8"/>
+              <circle cx="34.6" cy="12.6" r="9.4" fill="url(#gSkin)"/>
+              <path d="M25.2 12.2c0-5.4 4.2-9.8 9.4-9.8s9.4 4.4 9.4 9.8z" fill="#f5f7fa"/>
+              <path d="M25.2 12.2c0-5.4 4.2-9.8 9.4-9.8 1.5 0 2.9.3 4.1 1-4.8.9-8.4 5-8.8 8.8z" fill="#e1e6ec"/>
+              <ellipse cx="34.6" cy="6.4" rx="3.6" ry="2.6" class="sirenGlow"/>
+              <circle cx="34.6" cy="6.6" r="2" class="siren-l"/>
+              <rect x="24.4" y="11.4" width="20.4" height="3.6" rx="1.8" fill="#0b1f3f"/>
+              <rect x="32.2" y="11.9" width="4.8" height="2.6" rx="1" fill="#c9a44a"/>
+              <ellipse cx="30.4" cy="16.4" rx="2.3" ry="1.8" fill="#fff"/>
+              <ellipse cx="38.6" cy="16.4" rx="2.3" ry="1.8" fill="#fff"/>
+              <circle cx="31.1" cy="16.6" r="1.1" fill="#1f2937"/>
+              <circle cx="39.2" cy="16.6" r="1.1" fill="#1f2937"/>
+              <path d="M31 20.2q3.6 2 7.2 0" stroke="#c2845a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <path d="M43.6 15.4q2.4.6 3 2.6" stroke="#d9a279" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+              <g class="thighF">
+                <rect x="30.5" y="41" width="7" height="13.5" rx="3.5" fill="#1d3f74"/>
+                <g class="shinF">
+                  <rect x="30.8" y="53.5" width="6.4" height="12" rx="3.2" fill="#08132a"/>
+                  <path d="M31 62.4h3.9c5.1 0 9.3 2 9.3 4.1 0 1-.8 1.7-2.3 1.7H31c-1.4 0-2.4-1-2.4-2.2v-1.4c0-1.2 1-2.2 2.4-2.2z" fill="#020814"/>
+                </g>
+              </g>
+              <g class="armF">
+                <path d="M38 25c3 3 5.6 5.6 8.4 8.6 1.3 1.4-.6 3.6-2.2 2.5l-8-5.6z" fill="url(#gSkin)"/>
+                <path d="M45.6 33.2q4.4-2.6 7.4.6-1.6 4.2-7 2.6z" fill="url(#gSkin)"/>
+              </g>
+            </g>
+          </svg>
+        </span>
+      </div>
+      <div class="chase-caught-msg" id="chaseCaughtMsg">체포 완료! 🚔✨</div>
+      <div class="chase-tip">탭하면 도둑을 잡아요</div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h2><span class="num">4</span>오늘 내가 제출한 내역</h2>
+      <div id="myList" class="ai-status">아직 제출한 내역이 없습니다.</div>
+    </div>
+  </div>
+
+  <div class="card" id="adminCard">
+    <h2><span class="num">🔐</span>관리자 인증</h2>
+    <div class="row2">
+      <div>
+        <label>관리자 PIN</label>
+        <input type="password" id="adminPin" placeholder="PIN 입력" inputmode="numeric">
+      </div>
+      <div style="display:flex;align-items:end">
+        <button type="button" class="btn btn-main" style="padding:12px 8px" id="btnUnlock">접속</button>
+      </div>
+    </div>
+    <div id="adminStatus" class="ai-status" style="margin:10px 0 0;padding:10px">PIN을 입력하세요. (기본값: 1234, 아래에서 변경 가능)</div>
+
+    <div id="adminBody" style="display:none;margin-top:14px;">
+      <div id="roleStatus" class="ai-status ok" style="margin-bottom:12px;"></div>
+      <div class="master-only" style="margin-bottom:16px;">
+        <label>관리할 지사 선택</label>
+        <div id="branchPicker" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+        <div class="hint" style="margin-top:6px;">※ 선택한 지사가 아래 직원 명단·지사별 상세에 자동으로 반영됩니다. 지사별 전체 요약표는 계속 모든 지사를 보여줍니다.</div>
+      </div>
+      <div class="banner main">
+        <img src="smart-security-banner.png" alt="S1 에스원 스마트 시큐리티">
+      </div>
+      <div class="banner">
+        <img src="panel-sticker-dashboard.png" alt="에스원 판넬·스티커 종류">
+        <div class="cap">판넬 · 스티커 리텐션 현황<small>지사별 부착 실적 집계</small></div>
+      </div>
+      <div class="master-only" style="border-top:1px solid var(--line);margin:18px 0 0;padding-top:14px;">
+        <h2 style="margin:0 0 10px;font-size:14.5px;color:var(--navy);">공지사항 관리</h2>
+        <label>내용 (근무자용 화면 상단에 표시됩니다)</label>
+        <textarea id="noticeInput" rows="5" placeholder="예) 판넬 부착 기준: 출입구에서 잘 보이는 벽면, 지면에서 1.5m 높이에 부착해 주세요."
+          style="width:100%;padding:12px;border:1.5px solid var(--line);border-radius:10px;font-size:15px;
+          background:#fbfcfe;color:var(--ink);outline:none;font-family:inherit;resize:vertical;"></textarea>
+        <div class="row2" style="margin-top:8px;">
+          <button type="button" class="btn btn-main" style="margin-top:0" id="btnSaveNotice">공지 게시</button>
+          <button type="button" class="btn btn-line" style="margin-top:0" id="btnClearNotice">공지 내리기</button>
+        </div>
+        <div id="noticeAdminStatus" class="ai-status" style="margin-top:8px;">현재 게시된 공지가 없습니다.</div>
+      </div>
+
+      <label style="margin-top:16px;">조회 날짜</label>
+      <input type="date" id="statDate">
+      <div id="branchTable" class="year-table" style="margin-top:10px;"></div>
+      <div class="row2" style="margin-top:10px;">
+        <button type="button" class="btn btn-line" style="margin-top:0" id="btnRefresh">새로고침</button>
+        <button type="button" class="btn btn-line" style="margin-top:0" id="btnExport">CSV 내보내기</button>
+      </div>
+
+      <div style="border-top:1px solid var(--line);margin:18px 0 0;padding-top:14px;">
+        <h2 style="margin:0 0 10px;font-size:14.5px;color:var(--navy);">직원 명단 관리</h2>
+        <label>지사 선택</label>
+        <select id="rosterBranch"><option value="">지사를 선택하세요</option></select>
+        <div class="row2" style="margin-top:8px;">
+          <div style="flex:2">
+            <label>직원 추가</label>
+            <input type="text" id="newPerson" placeholder="이름 입력">
+          </div>
+          <div style="display:flex;align-items:end">
+            <button type="button" class="btn btn-main" style="padding:12px 8px" id="btnAddPerson">추가</button>
+          </div>
+        </div>
+        <label>등록된 직원</label>
+        <div id="rosterList" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+        <div id="rosterStatus" class="ai-status" style="margin-top:10px;">지사를 선택하면 등록된 직원 명단이 표시됩니다.</div>
+        <button type="button" class="btn btn-line" id="btnSaveRoster">지금 다시 동기화</button>
+        <div class="hint" style="margin-top:4px;">추가/삭제 시 자동으로 전 지사에 반영됩니다. 이 버튼은 수동 재동기화용입니다.</div>
+        <div class="hint" style="margin-top:6px;">※ 추가/삭제 즉시 근무자용 이름 선택 목록에 반영됩니다. 공용서버가 연결되어 있으면 다른 기기에도 자동으로 적용됩니다.</div>
+      </div>
+
+      <div style="border-top:1px solid var(--line);margin:18px 0 0;padding-top:14px;">
+        <h2 style="margin:0 0 10px;font-size:14.5px;color:var(--navy);">지사별 근무자 상세</h2>
+        <label>조회 기간</label>
+        <div class="seg" id="segPeriod">
+          <button type="button" data-v="month">월별</button>
+          <button type="button" class="on" data-v="day">일별</button>
+        </div>
+        <div class="row2" id="monthPicker" style="display:none;margin-top:8px;">
+          <div>
+            <label>연도</label>
+            <input type="number" id="detailYear" min="2020" max="2100" inputmode="numeric">
+          </div>
+          <div>
+            <label>월</label>
+            <select id="detailMonth">
+              <option value="01">1월</option><option value="02">2월</option><option value="03">3월</option>
+              <option value="04">4월</option><option value="05">5월</option><option value="06">6월</option>
+              <option value="07">7월</option><option value="08">8월</option><option value="09">9월</option>
+              <option value="10">10월</option><option value="11">11월</option><option value="12">12월</option>
+            </select>
+          </div>
+        </div>
+        <label style="margin-top:10px;">지사 선택</label>
+        <select id="detailBranch"><option value="">지사를 선택하세요</option></select>
+        <div id="detailSummary" class="ai-status" style="margin-top:10px;">지사를 선택하면 근무자별 제출 건수가 표시됩니다.</div>
+        <div id="detailTable" class="year-table" style="margin-top:10px;"></div>
+        <button type="button" class="btn btn-line" id="btnExportDetail">선택 지사 CSV 내보내기</button>
+      </div>
+
+      <div class="master-only" style="border-top:1px solid var(--line);margin:18px 0 0;padding-top:14px;">
+        <h2 style="margin:0 0 10px;font-size:14.5px;color:var(--navy);">지사별 관리자 PIN</h2>
+        <div class="hint" style="margin-bottom:8px;">지사 파트장에게 지사 전용 PIN을 배정하세요. 그 PIN으로 로그인하면 본인 지사만 관리할 수 있습니다. (마스터 PIN은 서울사업팀 지원그룹 전용이며 전체 지사를 관리합니다)</div>
+        <label>지사 선택</label>
+        <select id="pinBranch"><option value="">지사를 선택하세요</option></select>
+        <div class="row2" style="margin-top:8px;">
+          <div>
+            <label>지사 PIN</label>
+            <input type="text" id="pinValue" inputmode="numeric" placeholder="예) 1111">
+          </div>
+          <div style="display:flex;align-items:end">
+            <button type="button" class="btn btn-main" style="padding:12px 8px" id="btnSetBranchPin">저장</button>
+          </div>
+        </div>
+        <div id="branchPinStatus" class="ai-status" style="margin-top:8px;">지사를 선택하면 배정된 PIN이 표시됩니다.</div>
+        <div id="branchPinList" style="margin-top:10px;display:flex;flex-direction:column;gap:5px;"></div>
+        <button type="button" class="btn btn-line" id="btnSaveBranchPins">지금 다시 동기화</button>
+        <div class="hint" style="margin-top:4px;">PIN 저장 시 자동으로 전 지사에 반영됩니다. 이 버튼은 수동 재동기화용입니다.</div>
+      </div>
+      <div class="master-only" style="border-top:1px solid var(--line);margin:18px 0 0;padding-top:14px;">
+  <h2 style="margin:0 0 10px;font-size:14.5px;color:var(--navy);">총관리자 PIN 변경</h2>
+  <div class="hint" style="margin-bottom:8px;">서울사업팀 지원그룹 전용 마스터 PIN을 변경합니다. 변경 즉시 전 지사에 적용됩니다.</div>
+  <label>새 마스터 PIN</label>
+  <input type="text" id="masterPinValue" inputmode="numeric" placeholder="새 PIN 입력">
+  <button type="button" class="btn btn-main" style="margin-top:8px" id="btnSetMasterPin">저장</button>
+  <div id="masterPinStatus" class="ai-status" style="margin-top:8px;">현재 PIN으로 로그인 중입니다.</div>
+</div>
+
+<div class="master-only" style="border-top:1px solid var(--line);margin:18px 0 0;padding-top:14px;">
+          <h2 style="margin:0 0 10px;font-size:14.5px;color:var(--navy);">지사별 초기화</h2>
+                  <div class="hint" style="margin-bottom:8px;">선택한 지사의 기록만 서버에서 삭제합니다.</div>
+                          <label>지사 선택</label>
+                                  <select id="resetBranch"><option value="">지사를 선택하세요</option></select>
+                                          <button type="button" class="btn btn-line" style="margin-top:8px" id="btnClearBranch">선택 지사만 초기화</button>
+                                                </div>
+                                                      <button type="button" class="btn btn-line master-only" id="btnClear" style="margin-top:18px;">전체 초기화 (서버+이 기기)</button>
+  <div class="hint" style="margin-bottom:8px;">선택한 지사의 기록만 서버에서 삭제
+      <div class="hint master-only" style="margin-top:8px;">※ 공용서버(전 지사 공유 스프레드시트)에 연결되어 있어 초기화 시 모든 지사의 데이터가 함께 삭제됩니다.</div>
+    </div>
+  </div>
+
+  <div class="foot">S1 북서울지사 · 판넬/스티커 부착 건수 취합<br>부착 종류 자동인식은 보조 수단이며 최종 확인은 제출자 본인에게 있습니다.</div>
+</div>
+<div class="toast" id="toast"></div>
+<div id="reportModal" style="display:none;position:fixed;inset:0;background:rgba(12,22,40,.55);z-index:200;
+     align-items:center;justify-content:center;padding:16px;">
+  <div style="background:#fff;border-radius:16px;width:100%;max-width:460px;max-height:88vh;overflow:auto;
+       padding:18px 16px 16px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+      <h2 style="margin:0;font-size:15px;color:var(--navy);">제출 보고서</h2>
+      <button type="button" id="reportClose" style="border:0;background:#eef2f7;color:var(--sub);
+        width:30px;height:30px;border-radius:50%;font-size:15px;line-height:1;">✕</button>
+    </div>
+    <div id="reportBody"></div>
+  </div>
+</div>
+
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const toast = m => { const t=$('toast'); t.textContent=m; t.classList.add('show');
+  clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('show'),2200); };
+const todayISO = () => new Date().toISOString().slice(0,10);
+
+const BRANCHES = ["북서울지사","성북지사","동부지사","동서울지사","서강지사","강북광역지사","남양주지사","서서울지사","강남광역지사","송파지사","강동지사","강서지사","영등포지사","구로지사","서초지사","제주지사"];
+BRANCHES.forEach(b=>{ const o=document.createElement('option'); o.value=b; o.textContent=b; $('f_branch').appendChild(o); });
+$('f_branch').value = "북서울지사";
+$('f_date').value = todayISO();
+
+/* ---------- 로컬 저장 ---------- */
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+};
+function getRecords(){ return store.get('panel_records', []); }
+function setRecords(r){ store.set('panel_records', r); }
+function setRecordsStrict(r){ localStorage.setItem('panel_records', JSON.stringify(r)); }
+function getRoster(){ return store.get('panel_roster', {}); }
+function setRoster(r){ store.set('panel_roster', r); }
+function getNotice(){ return store.get('panel_notice', null); }
+function setNotice(n){ store.set('panel_notice', n); }
+function getBranchPins(){ return store.get('panel_branch_pins', {}); }
+function setBranchPins(p){ store.set('panel_branch_pins', p); }
+/* 공용서버 주소 고정 — 여기 값만 바꾸면 전체 앱의 동기화 대상이 바뀝니다 */
+const FIXED_SERVER_URL = 'https://script.google.com/macros/s/AKfycbyVVBGIG4NEZt8m3tCoZAop2kuuygMIctDmG2XtQE52hAAcx9HkJq75ChQOxB1wda_MNQ/exec';
+function getServerUrl(){ return FIXED_SERVER_URL; }
+function getAdminPin(){ return store.get('panel_admin_pin', DEFAULT_PIN); }
+
+async function serverGet(action, params){
+  const url = getServerUrl(); if(!url) return null;
+  const qs = new URLSearchParams({ action, ...params }).toString();
+  const res = await fetch(url + '?' + qs, { cache:'no-store' });
+  return res.json();
+}
+async function serverPost(action, payload){
+  const url = getServerUrl(); if(!url) return null;
+  const res = await fetch(url, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({ action, ...payload }) });
+  return res.json();
+}
+
+/* ---------- 근무자명 선택 (직원 명단 기반) ---------- */
+function refreshNameOptions(){
+  const branch = $('f_branch').value;
+  const names = (getRoster()[branch] || []);
+  const sel = $('f_nameSel');
+  const prev = sel.value;
+  sel.innerHTML = '';
+  names.forEach(n=>{ const o=document.createElement('option'); o.value=n; o.textContent=n; sel.appendChild(o); });
+  const man = document.createElement('option'); man.value='__manual__'; man.textContent='직접 입력'; sel.appendChild(man);
+  if(!names.length){
+    sel.value = '__manual__';
+  } else if(names.includes(prev)){
+    sel.value = prev;
+  } else {
+    sel.value = names[0];
+  }
+  applyNameMode();
+}
+function applyNameMode(){
+  const manual = $('f_nameSel').value === '__manual__';
+  $('f_name').style.display = manual ? '' : 'none';
+  if(!manual) $('f_name').value = '';
+  updateMyMonthStat();
+}
+function currentWorkerName(){
+  const v = $('f_nameSel').value;
+  return (v === '__manual__') ? $('f_name').value.trim() : v;
+}
+$('f_nameSel').addEventListener('change', applyNameMode);
+$('f_branch').addEventListener('change', refreshNameOptions);
+$('f_name').addEventListener('input', updateMyMonthStat);
+
+/* 근무자명 옆에 이번 달 실적을 작게 표시 (이 기기에 저장된 기록 기준) */
+function updateMyMonthStat(){
+  const branch = $('f_branch').value;
+  const name = currentWorkerName();
+  const box = $('myMonthStat');
+  if(!branch || !name){ box.textContent=''; return; }
+  const month = todayISO().slice(0,7);
+  const mine = getRecords().filter(r=>r.branch===branch && r.name===name && String(r.date||'').slice(0,7)===month);
+  if(!mine.length){ box.textContent = '이번 달 제출 기록 없음 (이 기기 기준)'; return; }
+  const panel = mine.filter(r=>r.type==='판넬').length;
+  const sticker = mine.filter(r=>r.type==='스티커').length;
+  box.textContent = `이번 달 ${mine.length}건 (판넬 ${panel} · 스티커 ${sticker}) · 이 기기 기준`;
+}
+
+/* 공용서버에 명단이 있으면 불러옵니다 (근무자도 PIN 없이 조회 가능) */
+async function loadRosterFromServer(){
+  if(!getServerUrl()) return;
+  try{
+    const res = await serverGet('roster', {});
+    if(res && res.ok && res.roster){ setRoster(res.roster); refreshNameOptions(); }
+  }catch(e){ /* 서버 미연결 시 로컬 명단 사용 */ }
+}
+refreshNameOptions();
+loadRosterFromServer();
+
+/* ---------- 공지사항 (근무자용 표시) ---------- */
+function renderNotice(){
+  const n = getNotice();
+  const card = $('noticeCard');
+  if(!n || !n.text || !n.text.trim()){ card.style.display='none'; return; }
+  card.style.display='block';
+  $('noticeBody').textContent = n.text;
+  $('noticeMeta').textContent = n.updatedAt ? `업데이트 · ${n.updatedAt}` : '';
+}
+async function loadNoticeFromServer(){
+  if(!getServerUrl()){ renderNotice(); return; }
+  try{
+    const res = await serverGet('notice', {});
+    if(res && res.ok){ setNotice(res.notice || null); }
+  }catch(e){ /* 서버 미연결 시 로컬 공지 사용 */ }
+  renderNotice();
+}
+loadNoticeFromServer();
+
+/* ---------- 지사별 관리자 PIN (서버 동기화) ---------- */
+async function loadBranchPinsFromServer(){
+  if(!getServerUrl()) return;
+  try{
+    const res = await serverGet('branchPins', {});
+    if(res && res.ok && res.pins){ setBranchPins(res.pins); }
+  }catch(e){ /* 서버 미연결 시 로컬 PIN 목록 사용 */ }
+}
+loadBranchPinsFromServer();
+
+/* 공지사항 · 직원명단 · 지사PIN은 열어둔 화면에도 자동 반영되도록 주기적으로 다시 불러옵니다 */
+setInterval(()=>{
+  if(!getServerUrl()) return;
+  loadNoticeFromServer();
+  loadRosterFromServer();
+  loadBranchPinsFromServer();
+}, 60000);
+
+/* ---------- 차량 배너: 터치하면 경광등 + 클락션 ---------- */
+let hornCtx = null;
+function playHorn(){
+  try{
+    hornCtx = hornCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if(hornCtx.state === 'suspended') hornCtx.resume();
+    const now = hornCtx.currentTime;
+    [0, 0.34].forEach(offset=>{
+      const t = now + offset, dur = 0.26;
+      const gain = hornCtx.createGain();
+      gain.gain.setValueAtTime(0.0001, t);
+      gain.gain.exponentialRampToValueAtTime(0.32, t + 0.02);
+      gain.gain.setValueAtTime(0.32, t + dur - 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      gain.connect(hornCtx.destination);
+      [440, 554].forEach(freq=>{
+        const osc = hornCtx.createOscillator();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(freq, t);
+        osc.connect(gain);
+        osc.start(t); osc.stop(t + dur);
+      });
+    });
+  }catch(e){ /* 소리 미지원 환경에서는 경광등만 동작 */ }
+}
+if($('carBanner')){
+  $('carBanner').addEventListener('click', ()=>{
+    const el = $('carBanner');
+    if(el.classList.contains('siren')) return;
+    el.classList.add('siren');
+    playHorn();
+    setTimeout(()=>el.classList.remove('siren'), 1750);
+  });
+}
+
+/* 도둑 잡기 미니 배너 */
+if($('chaseBanner')){
+  $('chaseBanner').addEventListener('click', ()=>{
+    const el = $('chaseBanner');
+    if(el.classList.contains('caught')) return;
+    el.classList.add('caught');
+    setTimeout(()=>el.classList.remove('caught'), 1500);
+  });
+}
+
+/* ---------- 탭 전환 ---------- */
+$('tabEmployee').addEventListener('click', ()=>{
+  document.body.classList.remove('admin-mode'); document.body.classList.add('employee-mode');
+  $('tabEmployee').classList.add('active'); $('tabAdmin').classList.remove('active');
+});
+$('tabAdmin').addEventListener('click', ()=>{
+  document.body.classList.remove('employee-mode'); document.body.classList.add('admin-mode');
+  $('tabAdmin').classList.add('active'); $('tabEmployee').classList.remove('active');
+});
+
+/* ---------- 사진 + 부착 종류(판넬/스티커) 자동인식 ---------- */
+let photos = { 0: null, 1: null };
+let attachType = '판넬';
+const PH_LABEL = { 0:'부착 전', 1:'부착 후' };
+
+$('segType').querySelectorAll('button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    $('segType').querySelectorAll('button').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    attachType = btn.dataset.v;
+  });
+});
+
+[0,1].forEach(i=>{
+  $('file'+i).addEventListener('change', e=>{
+    const f = e.target.files[0]; if(!f) return;
+    const reader = new FileReader();
+    reader.onload = ev=>{
+      photos[i] = ev.target.result;
+      $('ph'+i).innerHTML = `<img src="${photos[i]}" alt="${PH_LABEL[i]} 사진"><button type="button" class="del" id="delPh${i}">✕</button>`;
+      $('delPh'+i).addEventListener('click', ev2=>{
+        ev2.preventDefault(); ev2.stopPropagation();
+        photos[i]=null; $('ph'+i).innerHTML=`<span class="ico">📷</span>${PH_LABEL[i]}`; $('file'+i).value='';
+      });
+      runTypeDetection();
+    };
+    reader.readAsDataURL(f);
+  });
+});
+
+function analyzeBackgroundTexture(url){
+  return new Promise(resolve=>{
+    const img = new Image();
+    img.onload = ()=>{
+      const w = 160, h = Math.max(1, Math.round(160*img.height/img.width));
+      const canvas = document.createElement('canvas');
+      canvas.width=w; canvas.height=h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img,0,0,w,h);
+      let data;
+      try{ data = ctx.getImageData(0,0,w,h).data; }catch(e){ resolve(null); return; }
+      const patchSize = Math.max(6, Math.round(w*0.12));
+      const patches = [
+        [0,0], [w-patchSize,0], [0,h-patchSize], [w-patchSize,h-patchSize]
+      ];
+      let variances = [];
+      patches.forEach(([px,py])=>{
+        let vals = [];
+        for(let y=py; y<py+patchSize && y<h; y++){
+          for(let x=px; x<px+patchSize && x<w; x++){
+            const i = (y*w+x)*4;
+            const lum = 0.299*data[i] + 0.587*data[i+1] + 0.114*data[i+2];
+            vals.push(lum);
+          }
+        }
+        if(vals.length){
+          const mean = vals.reduce((a,b)=>a+b,0)/vals.length;
+          const variance = vals.reduce((a,b)=>a+(b-mean)*(b-mean),0)/vals.length;
+          variances.push(variance);
+        }
+      });
+      const avgVar = variances.length ? variances.reduce((a,b)=>a+b,0)/variances.length : 0;
+      resolve(avgVar);
+    };
+    img.onerror = ()=>resolve(null);
+    img.src = url;
+  });
+}
+
+let typeClassifier = null, typeLoading = false;
+async function getTypeClassifier(){
+  if(typeClassifier) return typeClassifier;
+  if(typeLoading){ while(typeLoading) await new Promise(r=>setTimeout(r,300)); return typeClassifier; }
+  typeLoading = true;
+  const { pipeline } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2');
+  typeClassifier = await pipeline('zero-shot-image-classification','Xenova/clip-vit-base-patch32');
+  typeLoading = false;
+  return typeClassifier;
+}
+
+function detectRedRatio(url){
+  return new Promise(resolve=>{
+    const img = new Image();
+    img.onload = ()=>{
+      const w = 120, h = Math.max(1, Math.round(120*img.height/img.width));
+      const canvas = document.createElement('canvas');
+      canvas.width=w; canvas.height=h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img,0,0,w,h);
+      let data;
+      try{ data = ctx.getImageData(0,0,w,h).data; }catch(e){ resolve(0); return; }
+      let redCount=0, total=0;
+      for(let i=0;i<data.length;i+=4){
+        const r=data[i], g=data[i+1], b=data[i+2];
+        total++;
+        if(r>130 && (r-g)>70 && (r-b)>60) redCount++;
+      }
+      resolve(total ? redCount/total : 0);
+    };
+    img.onerror = ()=>resolve(0);
+    img.src = url;
+  });
+}
+
+async function runTypeDetection(){
+  const url = photos[1] || photos[0];
+  if(!url) return;
+  const st = $('st_type'), conf = $('conf_type'), row = $('row_type');
+  row.className = 'airow'; st.textContent = '인식 중...'; conf.textContent = '';
+
+  const [bgVar, redRatio] = await Promise.all([
+    analyzeBackgroundTexture(url),
+    detectRedRatio(url)
+  ]);
+  const roughSurfaceHint = (bgVar !== null && bgVar > 900);
+  const hasRedSignage = redRatio > 0.008;
+
+  try{
+    const clf = await getTypeClassifier();
+    const candidates = [
+      'a red security plaque or panel mounted on a rough stone, granite, brick, or concrete wall or pillar, not on a door',
+      'a small red sticker or decal attached directly onto a glass door, steel door, or entrance door surface',
+      'an ordinary photo with no red security sign, plaque, or sticker at all — such as electronics, furniture, cables, lights, or random indoor/outdoor objects'
+    ];
+    const out = await clf(url, candidates, { hypothesis_template: 'This is a photo of {}.' });
+    const sorted = [...out].sort((a,b)=>b.score-a.score);
+    const top = sorted[0];
+    const second = sorted[1];
+    const pct = Math.round(top.score*100);
+    const gap = top.score - second.score;
+
+    const noneIsTop = (top.label === candidates[2]);
+    const noneButRedDetected = noneIsTop && hasRedSignage && gap < 0.15;
+
+    if(noneIsTop && !noneButRedDetected){
+      row.className='airow v-uk';
+      st.textContent='판넬/스티커가 안 보여요';
+      conf.textContent=` (신뢰도 ${pct}%)`;
+      return;
+    }
+
+    const panelScore = out.find(o=>o.label===candidates[0]).score;
+    const stickerScore = out.find(o=>o.label===candidates[1]).score;
+    let detected = panelScore >= stickerScore ? '판넬' : '스티커';
+    let displayScore = Math.max(panelScore, stickerScore);
+
+    if(roughSurfaceHint && detected === '스티커' && (stickerScore - panelScore) < 0.12){
+      detected = '판넬';
+    }
+    if(hasRedSignage && !roughSurfaceHint && detected === '판넬' && (panelScore - stickerScore) < 0.12){
+      detected = '스티커';
+    }
+
+    const finalPct = Math.round(displayScore*100);
+    if(displayScore > 0.4 || noneButRedDetected){
+      row.className='airow v-ok'; st.textContent=detected; conf.textContent=` 신뢰도 ${finalPct}%`;
+      $('segType').querySelectorAll('button').forEach(b=>{
+        b.classList.toggle('on', b.dataset.v===detected);
+      });
+      attachType = detected;
+    } else {
+      row.className='airow v-uk'; st.textContent='불확실'; conf.textContent=` 신뢰도 ${finalPct}%`;
+    }
+  }catch(err){
+    row.className='airow v-uk'; st.textContent='분석 실패'; conf.textContent='';
+  }
+}
+/* ---------- 제출 ---------- */
+function shrinkImage(dataUrl, maxW = 520, quality = 0.62){
+  return new Promise(resolve=>{
+    const img = new Image();
+    img.onload = ()=>{
+      const scale = Math.min(1, maxW / img.width);
+      const w = Math.round(img.width * scale), h = Math.round(img.height * scale);
+      const c = document.createElement('canvas'); c.width=w; c.height=h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      try{ resolve(c.toDataURL('image/jpeg', quality)); }catch(e){ resolve(null); }
+    };
+    img.onerror = ()=>resolve(null);
+    img.src = dataUrl;
+  });
+}
+
+function renderMyList(){
+  const today = $('f_date').value || todayISO();
+  const mine = getRecords().filter(r=>r.date===today).sort((a,b)=>b.id-a.id);
+  const box = $('myList');
+  if(!mine.length){ box.className='ai-status'; box.textContent='아직 제출한 내역이 없습니다.'; return; }
+  box.className=''; box.style.background='transparent'; box.style.padding='0';
+  box.innerHTML = mine.map(r=>{
+    const thumbs = [r.photoBefore, r.photoAfter].filter(Boolean)
+      .map(src=>`<img src="${src}" alt="제출 사진" style="width:38px;height:38px;border-radius:7px;object-fit:cover;border:1px solid var(--line);">`).join('');
+    return `
+    <div class="rec" data-id="${r.id}" style="cursor:pointer">
+      <div class="rt"><b>${r.branch} · ${r.name}</b><span>${r.type||'-'} · ${r.place || '계약처명 미입력'}</span></div>
+      <div style="display:flex;gap:4px;align-items:center;">${thumbs || '<span style="font-size:11.5px;color:var(--sub)">사진 없음</span>'}</div>
+    </div>`;
+  }).join('');
+  box.querySelectorAll('.rec').forEach(el=>{
+    el.addEventListener('click', ()=>openReport(Number(el.dataset.id)));
+  });
+}
+renderMyList();
+
+function openReport(id){
+  const r = getRecords().find(x=>x.id===id);
+  if(!r) return;
+  const photoBlock = (label, src)=> src
+    ? `<div style="flex:1;min-width:0;">
+         <div style="font-size:11.5px;color:var(--sub);margin-bottom:4px;">${label}</div>
+         <img src="${src}" alt="${label}" style="width:100%;border-radius:10px;border:1px solid var(--line);display:block;">
+       </div>`
+    : `<div style="flex:1;min-width:0;">
+         <div style="font-size:11.5px;color:var(--sub);margin-bottom:4px;">${label}</div>
+         <div style="width:100%;aspect-ratio:1/1;border-radius:10px;border:1.5px dashed #b9c8dd;background:var(--sky);
+              display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--sub);">사진 없음</div>
+       </div>`;
+  $('reportBody').innerHTML = `
+    <div style="font-size:13px;line-height:1.9;margin-bottom:12px;">
+      <div><b style="color:var(--navy)">지사</b> · ${r.branch}</div>
+      <div><b style="color:var(--navy)">근무자</b> · ${r.name}</div>
+      <div><b style="color:var(--navy)">계약처</b> · ${r.place || '미입력'}</div>
+      <div><b style="color:var(--navy)">부착 종류</b> · ${r.type || '-'}</div>
+      <div><b style="color:var(--navy)">활동일자</b> · ${r.date}</div>
+    </div>
+    <div style="display:flex;gap:10px;">
+      ${photoBlock('부착 전', r.photoBefore)}
+      ${photoBlock('부착 후', r.photoAfter)}
+    </div>`;
+  $('reportModal').style.display='flex';
+}
+$('reportClose').addEventListener('click', ()=>{ $('reportModal').style.display='none'; });
+$('reportModal').addEventListener('click', e=>{ if(e.target===$('reportModal')) $('reportModal').style.display='none'; });
+
+$('btnSubmit').addEventListener('click', async ()=>{
+  if($('btnSubmit').disabled) return; $('btnSubmit').disabled = true;
+  const branch = $('f_branch').value, name = currentWorkerName();
+  const err = $('err_required');
+  if(!branch || !name){ err.style.display='block'; toast('필수 항목을 확인해 주세요'); $('btnSubmit').disabled=false; return; }
+  if(!photos[0] || !photos[1]){ toast('사진 두 장을 모두 첨부해야 제출할 수 있습니다'); $('btnSubmit').disabled=false; return; }
+  err.style.display='none';
+  const date = $('f_date').value || todayISO();
+  const place = $('f_place').value.trim();
+  const type = attachType;
+  const count = 1;
+  const photoBefore = await shrinkImage(photos[0]);
+  const photoAfter  = await shrinkImage(photos[1]);
+  const rec = { id: Date.now(), date, branch, name, place, type, count, photoBefore, photoAfter };
+  const all = getRecords(); all.push(rec);
+  try{
+    setRecordsStrict(all);
+  }catch(e){
+    all[all.length-1] = { ...rec, photoBefore:null, photoAfter:null };
+    setRecords(all);
+    toast('저장공간이 부족해 사진 없이 저장했습니다');
+  }
+  if(getServerUrl()){
+    try{ await serverPost('submit', { date, branch, name, place, type, count }); }
+    catch(e){ toast('서버 전송 실패 — 이 기기에는 저장됐습니다'); }
+  }
+  toast('제출되었습니다');
+  $('f_place').value=''; photos={0:null,1:null};
+  if($('f_nameSel').value === '__manual__') $('f_name').value='';
+  $('ph0').innerHTML='<span class="ico">📷</span>부착 전'; $('file0').value='';
+  $('ph1').innerHTML='<span class="ico">📷</span>부착 후'; $('file1').value='';
+  $('row_type').className='airow'; $('st_type').textContent='대기'; $('conf_type').textContent='';
+  $('segType').querySelectorAll('button').forEach(b=>b.classList.toggle('on', b.dataset.v==='판넬'));
+  attachType = '판넬';
+  renderMyList();
+  updateMyMonthStat();
+  $('btnSubmit').disabled = false;
+  renderMyList();
+    updateMyMonthStat();
+});
+$('f_date').addEventListener('change', renderMyList);
+
+/* ---------- 관리자 ---------- */
+const DEFAULT_PIN = '1234';
+let adminUnlocked = false;
+let adminRole = null;
+let adminBranch = null;
+
+$('btnUnlock').addEventListener('click', ()=>{
+  const pin = $('adminPin').value;
+  const masterPin = store.get('panel_admin_pin', DEFAULT_PIN);
+  let role = null, branch = null;
+  if(pin && pin === masterPin){
+    role = 'master';
+  } else if(pin){
+    const bp = getBranchPins();
+    const found = Object.entries(bp).find(([b,p]) => p && p === pin);
+    if(found){ role = 'branch'; branch = found[0]; }
+  }
+  if(!role){ $('adminStatus').className='ai-status err'; $('adminStatus').textContent='PIN이 올바르지 않습니다.'; return; }
+  adminUnlocked = true;
+  adminRole = role; adminBranch = branch;
+  $('adminStatus').className='ai-status ok';
+  $('adminStatus').textContent = (role==='master') ? '서울사업팀 지원그룹 관리자로 인증되었습니다.' : `${branch} 관리자로 인증되었습니다.`;
+  $('adminBody').style.display='block';
+  applyAdminRoleUI();
+  $('statDate').value = todayISO();
+  if(role==='master') renderBranchPicker();
+  renderBranchTable();
+  renderRoster();
+  renderNoticeAdminStatus();
+  renderBranchPinAdmin();
+});
+
+function applyAdminRoleUI(){
+  const isMaster = adminRole === 'master';
+  document.querySelectorAll('.master-only').forEach(el => { el.style.display = isMaster ? '' : 'none'; });
+  $('roleStatus').textContent = isMaster
+    ? '서울사업팀 지원그룹 · 전체 지사 관리 권한'
+    : `${adminBranch} 관리자 · 이 지사만 관리할 수 있습니다`;
+  if(!isMaster && adminBranch){
+    $('rosterBranch').value = adminBranch; $('rosterBranch').disabled = true;
+    $('detailBranch').value = adminBranch; $('detailBranch').disabled = true;
+  } else {
+    $('rosterBranch').disabled = false;
+    $('detailBranch').disabled = false;
+  }
+}
+
+function renderBranchPicker(){
+  const box = $('branchPicker');
+  box.innerHTML = BRANCHES.map(b=>`<button type="button" class="pickbtn" data-b="${b}">${b}</button>`).join('');
+  box.querySelectorAll('.pickbtn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      box.querySelectorAll('.pickbtn').forEach(b=>b.classList.remove('on'));
+      btn.classList.add('on');
+      const b = btn.dataset.b;
+      $('rosterBranch').value = b; renderRoster();
+      $('detailBranch').value = b; loadDetail();
+    });
+  });
+}
+$('statDate').addEventListener('change', renderBranchTable);
+$('btnRefresh').addEventListener('click', async ()=>{
+  await renderBranchTable();
+  toast(getServerUrl() ? '새로고침 완료 (공용서버 데이터)' : '새로고침 완료 (이 기기 데이터 · 공용서버 미연결)');
+});
+
+async function fetchRecordsForDate(date){
+  if(getServerUrl()){
+    try{
+      const res = await serverGet('list', { key: store.get('panel_admin_pin', DEFAULT_PIN), date });
+      if(res && res.ok) return res.rows.map(r=>({date:r.date, branch:r.branch, name:r.name, place:r.place, type:r.type, count:r.count}));
+      toast(res && res.error ? res.error : '서버 조회 실패 — 이 기기 데이터로 표시합니다');
+    }catch(e){ toast('서버 연결 실패 — 이 기기 데이터로 표시합니다'); }
+  }
+  return getRecords().filter(r=>r.date===date);
+}
+
+async function fetchRecordsForMonth(month){
+  if(getServerUrl()){
+    try{
+      const res = await serverGet('list', { key: store.get('panel_admin_pin', DEFAULT_PIN), month });
+      if(res && res.ok) return res.rows.map(r=>({date:r.date, branch:r.branch, name:r.name, place:r.place, type:r.type, count:r.count}));
+      toast(res && res.error ? res.error : '서버 조회 실패 — 이 기기 데이터로 표시합니다');
+    }catch(e){ toast('서버 연결 실패 — 이 기기 데이터로 표시합니다'); }
+  }
+  return getRecords().filter(r=>String(r.date||'').slice(0,7)===month);
+}
+
+async function renderBranchTable(){
+  const date = $('statDate').value;
+  $('branchTable').innerHTML = '<div class="ai-status" style="margin:0">불러오는 중...</div>';
+  const allRecs = await fetchRecordsForDate(date);
+  const scoped = (adminRole==='branch' && adminBranch) ? adminBranch : null;
+  const recs = scoped ? allRecs.filter(r=>r.branch===scoped) : allRecs;
+  const branchList = scoped ? [scoped] : BRANCHES;
+  const rows = branchList.map(b=>{
+    const sub = recs.filter(r=>r.branch===b);
+    const panelCnt = sub.filter(r=>r.type==='판넬').reduce((s,r)=>s+Number(r.count||0),0);
+    const stickerCnt = sub.filter(r=>r.type==='스티커').reduce((s,r)=>s+Number(r.count||0),0);
+    return `<tr class="brow" data-b="${b}" style="cursor:pointer"><td>${b}</td><td>${sub.length}</td><td>${panelCnt}</td><td>${stickerCnt}</td><td>${panelCnt+stickerCnt}</td></tr>`;
+  });
+  const totalPanel = recs.filter(r=>r.type==='판넬').reduce((s,r)=>s+Number(r.count||0),0);
+  const totalSticker = recs.filter(r=>r.type==='스티커').reduce((s,r)=>s+Number(r.count||0),0);
+  $('branchTable').innerHTML = `<table>
+    <tr><th>지사</th><th>인원</th><th>판넬</th><th>스티커</th><th>계</th></tr>
+    ${rows.join('')}
+    <tr class="total"><td>합계</td><td>${recs.length}</td><td>${totalPanel}</td><td>${totalSticker}</td><td>${totalPanel+totalSticker}</td></tr>
+  </table>`;
+  $('branchTable').querySelectorAll('.brow').forEach(tr=>{
+    tr.addEventListener('click', ()=>{ $('detailBranch').value = tr.dataset.b; loadDetail(); });
+  });
+  window.__lastRecs = recs;
+  if(periodMode==='day') loadDetail();
+}
+
+/* ---------- 직원 명단 관리 (관리자) ---------- */
+BRANCHES.forEach(b=>{ const o=document.createElement('option'); o.value=b; o.textContent=b; $('rosterBranch').appendChild(o); });
+$('rosterBranch').addEventListener('change', renderRoster);
+
+function renderRoster(){
+  const branch = $('rosterBranch').value;
+  const box = $('rosterList');
+  if(!branch){
+    box.innerHTML='';
+    $('rosterStatus').className='ai-status';
+    $('rosterStatus').textContent='지사를 선택하면 등록된 직원 명단이 표시됩니다.';
+    return;
+  }
+  const names = getRoster()[branch] || [];
+  if(!names.length){
+    box.innerHTML='';
+    $('rosterStatus').className='ai-status';
+    $('rosterStatus').textContent=`${branch}에 등록된 직원이 없습니다. 위에서 이름을 추가해 주세요.`;
+    return;
+  }
+  box.innerHTML = names.map(n=>`
+    <span style="display:inline-flex;align-items:center;gap:6px;background:var(--sky);color:var(--navy);
+      border-radius:20px;padding:6px 8px 6px 12px;font-size:13px;font-weight:600;">
+      ${n}<button type="button" class="delPerson" data-n="${n}" style="border:0;background:#c8d6e8;color:#fff;
+        width:19px;height:19px;border-radius:50%;font-size:12px;line-height:1;">✕</button>
+    </span>`).join('');
+  box.querySelectorAll('.delPerson').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const r = getRoster();
+      r[branch] = (r[branch]||[]).filter(x=>x!==btn.dataset.n);
+      setRoster(r); renderRoster(); refreshNameOptions();
+      syncRoster(false);
+    });
+  });
+  $('rosterStatus').className='ai-status ok';
+  $('rosterStatus').textContent=`${branch} · 등록 직원 ${names.length}명`;
+}
+
+function addPerson(){
+  const branch = $('rosterBranch').value;
+  if(!branch){ toast('지사를 먼저 선택해 주세요'); return; }
+  const name = $('newPerson').value.trim();
+  if(!name){ toast('이름을 입력해 주세요'); return; }
+  const r = getRoster();
+  r[branch] = r[branch] || [];
+  if(r[branch].includes(name)){ toast('이미 등록된 이름입니다'); return; }
+  r[branch].push(name);
+  r[branch].sort((a,b)=>a.localeCompare(b,'ko'));
+  setRoster(r);
+  $('newPerson').value='';
+  renderRoster(); refreshNameOptions();
+  syncRoster(true);
+}
+$('btnAddPerson').addEventListener('click', addPerson);
+$('newPerson').addEventListener('keydown', e=>{ if(e.key==='Enter') addPerson(); });
+
+async function syncRoster(showToastOnSuccess){
+  if(!getServerUrl()){ if(showToastOnSuccess) toast('이 기기에 저장되었습니다 (공용서버 미연결)'); return; }
+  try{
+    const res = await serverPost('saveRoster', { key: store.get('panel_admin_pin', DEFAULT_PIN), roster: getRoster() });
+    if(res && res.ok){ if(showToastOnSuccess) toast('전 지사에 자동 반영되었습니다'); }
+    else { toast(res && res.error ? res.error : '서버 동기화 실패 — 이 기기에만 저장되었습니다'); }
+  }catch(e){ toast('서버 연결 실패 — 이 기기에만 저장되었습니다'); }
+}
+$('btnSaveRoster').addEventListener('click', ()=> syncRoster(true));
+
+/* ---------- 지사별 관리자 PIN (마스터 전용) ---------- */
+BRANCHES.forEach(b=>{ const o=document.createElement('option'); o.value=b; o.textContent=b; $('pinBranch').appendChild(o); });
+BRANCHES.forEach(b=>{ const o=document.createElement('option'); o.value=b; o.textContent=b; $('resetBranch').appendChild(o); });
+
+function renderBranchPinAdmin(){
+  const pins = getBranchPins();
+  const branch = $('pinBranch').value;
+  if(branch){
+    $('pinValue').value = pins[branch] || '';
+    $('branchPinStatus').className = pins[branch] ? 'ai-status ok' : 'ai-status';
+    $('branchPinStatus').textContent = pins[branch] ? `${branch} PIN: ${pins[branch]}` : `${branch}에 아직 배정된 PIN이 없습니다.`;
+  } else {
+    $('branchPinStatus').className='ai-status';
+    $('branchPinStatus').textContent='지사를 선택하면 배정된 PIN이 표시됩니다.';
+  }
+  const assigned = Object.entries(pins).filter(([,p])=>p);
+  $('branchPinList').innerHTML = assigned.length
+    ? assigned.map(([b,p])=>`<div style="display:flex;justify-content:space-between;font-size:12.5px;">
+        <span>${b}</span><span style="color:var(--navy);font-weight:700;">${p}</span></div>`).join('')
+    : '<div style="font-size:12px;color:var(--sub);">아직 배정된 지사 PIN이 없습니다.</div>';
+}
+$('pinBranch').addEventListener('change', renderBranchPinAdmin);
+$('btnSetBranchPin').addEventListener('click', ()=>{
+  const branch = $('pinBranch').value;
+  const val = $('pinValue').value.trim();
+  if(!branch){ toast('지사를 먼저 선택해 주세요'); return; }
+  if(!val){ toast('PIN을 입력해 주세요'); return; }
+  const masterPin = store.get('panel_admin_pin', DEFAULT_PIN);
+  if(val === masterPin){ toast('마스터 PIN과 같은 값은 지사 PIN으로 쓸 수 없습니다'); return; }
+  const pins = getBranchPins();
+  const dup = Object.entries(pins).find(([b,p])=>p===val && b!==branch);
+  if(dup){ toast(`이미 ${dup[0]}에서 쓰는 PIN입니다`); return; }
+  pins[branch] = val;
+  setBranchPins(pins);
+  renderBranchPinAdmin();
+  syncBranchPins(true);
+});
+
+async function syncBranchPins(showToastOnSuccess){
+  if(!getServerUrl()){ if(showToastOnSuccess) toast('이 기기에 저장되었습니다 (공용서버 미연결)'); return; }
+  try{
+    const res = await serverPost('saveBranchPins', { key: store.get('panel_admin_pin', DEFAULT_PIN), pins: getBranchPins() });
+    if(res && res.ok){ if(showToastOnSuccess) toast('전 지사에 자동 반영되었습니다'); }
+    else { toast(res && res.error ? res.error : '서버 동기화 실패 — 이 기기에만 저장되었습니다'); }
+  }catch(e){ toast('서버 연결 실패 — 이 기기에만 저장되었습니다'); }
+}
+$('btnSaveBranchPins').addEventListener('click', ()=> syncBranchPins(true));
+
+/* ---------- 공지사항 관리 (관리자) ---------- */
+function renderNoticeAdminStatus(){
+  const n = getNotice();
+  if(n && n.text && n.text.trim()){
+    $('noticeInput').value = n.text;
+    $('noticeAdminStatus').className='ai-status ok';
+    $('noticeAdminStatus').textContent = `게시 중 · ${n.updatedAt || ''}`;
+  } else {
+    $('noticeAdminStatus').className='ai-status';
+    $('noticeAdminStatus').textContent = '현재 게시된 공지가 없습니다.';
+  }
+}
+renderNoticeAdminStatus();
+
+async function publishNotice(text){
+  const notice = text.trim()
+    ? { text: text.trim(), updatedAt: new Intl.DateTimeFormat('ko-KR',{month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(new Date()) }
+    : null;
+  setNotice(notice);
+  renderNotice();
+  renderNoticeAdminStatus();
+  if(getServerUrl()){
+    try{
+      const res = await serverPost('saveNotice', { key: store.get('panel_admin_pin', DEFAULT_PIN), notice });
+      if(!res || !res.ok) toast(res && res.error ? res.error : '서버 저장 실패 — 이 기기에만 반영됐습니다');
+      else toast(notice ? '공지를 게시했습니다' : '공지를 내렸습니다');
+    }catch(e){ toast('서버 연결 실패 — 이 기기에만 반영됐습니다'); }
+  } else {
+    toast(notice ? '공지를 게시했습니다 (공용서버 미연결)' : '공지를 내렸습니다');
+  }
+}
+$('btnSaveNotice').addEventListener('click', ()=>{
+  const text = $('noticeInput').value;
+  if(!text.trim()){ toast('내용을 입력해 주세요'); return; }
+  publishNotice(text);
+});
+$('btnClearNotice').addEventListener('click', ()=>{
+  $('noticeInput').value='';
+  publishNotice('');
+});
+
+/* ---------- 지사별 근무자 상세 (일별 / 월별) ---------- */
+BRANCHES.forEach(b=>{ const o=document.createElement('option'); o.value=b; o.textContent=b; $('detailBranch').appendChild(o); });
+let periodMode = 'day';
+let detailRecs = [];
+
+$('detailYear').value = new Date().getFullYear();
+$('detailMonth').value = String(new Date().getMonth()+1).padStart(2,'0');
+
+$('segPeriod').querySelectorAll('button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    $('segPeriod').querySelectorAll('button').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    periodMode = btn.dataset.v;
+    $('monthPicker').style.display = (periodMode==='month') ? 'flex' : 'none';
+    loadDetail();
+  });
+});
+$('detailBranch').addEventListener('change', loadDetail);
+$('detailYear').addEventListener('change', ()=>{ if(periodMode==='month') loadDetail(); });
+$('detailMonth').addEventListener('change', ()=>{ if(periodMode==='month') loadDetail(); });
+
+function currentMonthStr(){
+  const y = $('detailYear').value || new Date().getFullYear();
+  return `${y}-${$('detailMonth').value}`;
+}
+
+async function loadDetail(){
+  const branch = $('detailBranch').value;
+  if(!branch){
+    $('detailSummary').className='ai-status';
+    $('detailSummary').textContent='지사를 선택하면 근무자별 제출 건수가 표시됩니다.';
+    $('detailTable').innerHTML=''; detailRecs=[]; return;
+  }
+  if(periodMode==='month'){
+    $('detailSummary').className='ai-status';
+    $('detailSummary').textContent='불러오는 중...';
+    detailRecs = await fetchRecordsForMonth(currentMonthStr());
+  } else {
+    detailRecs = window.__lastRecs || [];
+  }
+  renderDetailTable();
+}
+
+function renderDetailTable(){
+  const branch = $('detailBranch').value;
+  if(!branch){
+    $('detailSummary').className='ai-status';
+    $('detailSummary').textContent='지사를 선택하면 근무자별 제출 건수가 표시됩니다.';
+    $('detailTable').innerHTML=''; return;
+  }
+  const periodLabel = (periodMode==='month')
+    ? `${$('detailYear').value}년 ${Number($('detailMonth').value)}월`
+    : ($('statDate').value || '선택한 날짜');
+  const sub = detailRecs.filter(r=>r.branch===branch);
+  if(!sub.length){
+    $('detailSummary').className='ai-status err';
+    $('detailSummary').textContent=`${branch}는 ${periodLabel}에 제출 내역이 없습니다.`;
+    $('detailTable').innerHTML=''; return;
+  }
+  const byName = {};
+  sub.forEach(r=>{
+    const n = r.name || '(이름 미입력)';
+    if(!byName[n]) byName[n] = { panel:0, sticker:0, days:new Set() };
+    if(r.type==='스티커') byName[n].sticker += Number(r.count||0);
+    else byName[n].panel += Number(r.count||0);
+    if(r.date) byName[n].days.add(r.date);
+  });
+  const names = Object.keys(byName).sort((a,b)=>(byName[b].panel+byName[b].sticker)-(byName[a].panel+byName[a].sticker) || a.localeCompare(b,'ko'));
+  const showDays = periodMode==='month';
+  const rows = names.map(n=>{
+    const d = byName[n];
+    const tot = d.panel + d.sticker;
+    return `<tr><td>${n}</td><td>${d.panel}</td><td>${d.sticker}</td><td>${tot}</td>${showDays?`<td>${d.days.size}</td>`:''}</tr>`;
+  });
+  const tp = sub.filter(r=>r.type==='판넬').reduce((s,r)=>s+Number(r.count||0),0);
+  const ts = sub.filter(r=>r.type==='스티커').reduce((s,r)=>s+Number(r.count||0),0);
+  const total = tp + ts;
+  const avg = names.length ? (total/names.length).toFixed(1) : '0';
+  $('detailSummary').className='ai-status ok';
+  $('detailSummary').textContent=`${branch} · ${periodLabel} · 근무자 ${names.length}명 · 판넬 ${tp} / 스티커 ${ts} (총 ${total}건) · 인당 평균 ${avg}건`;
+  $('detailTable').innerHTML = `<table>
+    <tr><th>근무자</th><th>판넬</th><th>스티커</th><th>계</th>${showDays?'<th>일수</th>':''}</tr>
+    ${rows.join('')}
+    <tr class="total"><td>합계</td><td>${tp}</td><td>${ts}</td><td>${total}</td>${showDays?'<td></td>':''}</tr>
+  </table>`;
+}
+
+$('btnExportDetail').addEventListener('click', ()=>{
+  const branch = $('detailBranch').value;
+  if(!branch){ toast('지사를 먼저 선택해 주세요'); return; }
+  const periodTag = (periodMode==='month') ? currentMonthStr() : $('statDate').value;
+  const sub = detailRecs.filter(r=>r.branch===branch);
+  if(!sub.length){ toast('내보낼 데이터가 없습니다'); return; }
+  const lines = [['날짜','지사명','근무자명','계약처명','부착종류','부착건수']];
+  sub.sort((a,b)=>String(a.date).localeCompare(String(b.date))||String(a.name).localeCompare(String(b.name),'ko'));
+  sub.forEach(r=>lines.push([r.date,r.branch,r.name,r.place,r.type,r.count]));
+  const csv = '\ufeff'+lines.map(row=>row.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\r\n');
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`판넬부착_${branch}_${periodTag}.csv`; a.click(); URL.revokeObjectURL(a.href);
+  toast(`${branch} CSV를 내보냈습니다`);
+});
+$('btnExport').addEventListener('click', ()=>{
+  const date = $('statDate').value;
+  const recs = window.__lastRecs || [];
+  if(!recs.length){ toast('내보낼 데이터가 없습니다'); return; }
+  const lines = [['날짜','지사명','근무자명','계약처명','부착종류','부착건수']];
+  recs.forEach(r=>lines.push([r.date,r.branch,r.name,r.place,r.type,r.count]));
+  const csv = '\ufeff'+lines.map(row=>row.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\r\n');
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`판넬부착_${date}.csv`; a.click(); URL.revokeObjectURL(a.href);
+  toast('CSV를 내보냈습니다');
+});
+$('btnClear').addEventListener('click', async ()=>{
+  if(!confirm('저장된 모든 판넬 부착 기록을 삭제할까요? (서버 데이터 포함)')) return;
+  setRecords([]);
+  if(getServerUrl()){
+    try{ await serverPost('clearRecords', { key: store.get('panel_admin_pin', DEFAULT_PIN) }); }
+    catch(e){ toast('서버 초기화 실패 — 이 기기 데이터만 삭제됐습니다'); }
+  }
+  renderBranchTable(); renderMyList(); toast('초기화되었습니다');
+  });
+  $('btnClearBranch').addEventListener('click', async ()=>{
+      const branch = $('resetBranch').value;
+        if(!branch){ toast('초기화할 지사를 선택해 주세요'); return; }
+          if(!confirm(`[${branch}] 지사의 기록만 삭제할까요?`)) return;
+            if(getServerUrl()){
+                try{
+                      const res = await serverPost('clearRecords', { key: store.get('panel_admin_pin', DEFAULT_PIN), branch });
+                            if(!res || !res.ok){ toast((res && res.error) || '초기화 실패'); return; }
+                                }catch(e){ toast('서버 연결 실패 — 초기화되지 않았습니다'); return; }
+                                  }
+                                    const all = getRecords().filter(r=>r.branch !== branch);
+                                      setRecords(all);
+                                        renderBranchTable(); renderMyList();
+                                          toast(`[${branch}] 지사 기록이 초기화되었습니다`);
+                                          });
+function updateBranchLabels(){
+    const name = $('f_branch').value || '서울사업팀';
+      const headP = document.querySelector('header.hero p');
+        if(headP) headP.textContent = headP.textContent.replace(/^\S+지사/, name);
+          const footDiv = document.querySelector('.foot');
+            if(footDiv) footDiv.innerHTML = footDiv.innerHTML.replace(/S1 \S+지사/, 'S1 ' + name);
+            }
+            $('f_branch').addEventListener('change', updateBranchLabels);
+            updateBranchLabels();
+            $('btnSetMasterPin').addEventListener('click', async ()=>{
+                const newPin = $('masterPinValue').value.trim();
+                  if(!newPin){ toast('새 PIN을 입력해 주세요'); return; }
+                    if(!getServerUrl()){ toast('공용서버 미연결 상태에서는 변경할 수 없습니다'); return; }
+                      try{
+                          const res = await serverPost('saveMasterPin', { key: getAdminPin(), newPin });
+                              if(res && res.ok){
+                                    store.set('panel_admin_pin', newPin);
+                                          $('masterPinValue').value='';
+                                                $('masterPinStatus').className='ai-status ok';
+                                                      $('masterPinStatus').textContent='마스터 PIN이 변경되었습니다. 다음 로그인부터 새 PIN을 사용하세요.';
+                                                            toast('마스터 PIN이 변경되었습니다');
+                                                                } else {
+                                                                      toast(res && res.error ? res.error : '변경 실패');
+                                                                          }
+                                                                            }catch(e){ toast('서버 연결 실패 — 변경되지 않았습니다'); }
+});
+
+</script>
+</body>
+</html>
