@@ -1120,7 +1120,7 @@ $('btnUnlock').addEventListener('click', async ()=>{
     }
   }
   if(!role){ $('adminStatus').className='ai-status err'; $('adminStatus').textContent='PIN이 올바르지 않습니다.'; return; }
-  if(role==='master') store.set('panel_admin_pin', pin);
+  store.set('panel_admin_pin', pin);
   adminUnlocked = true;
   adminRole = role; adminBranch = branch;
   $('adminStatus').className='ai-status ok';
