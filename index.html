@@ -621,7 +621,8 @@
 const $ = id => document.getElementById(id);
 const toast = m => { const t=$('toast'); t.textContent=m; t.classList.add('show');
   clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('show'),2200); };
-const todayISO = () => new Date().toISOString().slice(0,10);
+// 한국 시간 기준 오늘 날짜 (예전엔 세계표준시라 오전 9시 전에는 전날로 나왔음)
+const todayISO = () => { const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); };
 
 const BRANCHES = ["북서울지사","성북지사","동부지사","동서울지사","서강지사","강북광역지사","남양주지사","서서울지사","강남광역지사","송파지사","강동지사","강서지사","영등포지사","구로지사","서초지사","제주지사"];
 BRANCHES.forEach(b=>{ const o=document.createElement('option'); o.value=b; o.textContent=b; $('f_branch').appendChild(o); });
@@ -692,7 +693,9 @@ $('f_branch').addEventListener('change', refreshNameOptions);
 $('f_name').addEventListener('input', updateMyMonthStat);
 
 /* 근무자명 옆에 이번 달 실적을 작게 표시 (공용서버 기준 · 전체 기기 합산) */
+let _statSeq = 0;
 async function updateMyMonthStat(){
+  const seq = ++_statSeq;   // 이름을 빨리 바꿀 때 이전 사람 숫자가 늦게 도착해 덮어쓰는 문제 방지
   const branch = $('f_branch').value;
   const name = currentWorkerName();
   const box = $('myMonthStat');
@@ -701,6 +704,7 @@ async function updateMyMonthStat(){
   if(getServerUrl()){
     try{
       const res = await serverGet('myStat', { branch, name, month });
+      if(seq !== _statSeq || name !== currentWorkerName()) return;
       if(res && res.ok){
         if(!res.count){ box.textContent = '이번 달 제출 기록 없음 (전체 기기 기준)'; return; }
         box.textContent = `이번 달 ${res.count}건 (판넬 ${res.panel} · 스티커 ${res.sticker}) · 전체 기기 기준`;
@@ -1084,11 +1088,12 @@ $('btnSubmit').addEventListener('click', async ()=>{
     setRecords(all);
     toast('저장공간이 부족해 사진 없이 저장했습니다');
   }
+  let sentOk = true;
   if(getServerUrl()){
-    try{ await serverPost('submit', { date, branch, name, place, type, count }); }
-    catch(e){ toast('서버 전송 실패 — 이 기기에는 저장됐습니다'); }
+    try{ await serverPost('submit', { date, branch, name, place, type, count }); markSent(rec.id); }
+    catch(e){ sentOk = false; markPending(rec.id); }
   }
-  toast('제출되었습니다');
+  toast(sentOk ? '제출되었습니다' : '⚠️ 서버 전송 실패 — 이 폰에 저장했고, 인터넷이 되면 자동으로 다시 보냅니다');
   $('f_place').value=''; photos={0:null,1:null};
   if($('f_nameSel').value === '__manual__') $('f_name').value='';
   $('ph0').innerHTML='<span class="ico">📷</span>부착 전'; $('file0').value='';
@@ -1103,6 +1108,16 @@ $('btnSubmit').addEventListener('click', async ()=>{
     updateMyMonthStat();
 });
 $('f_date').addEventListener('change', renderMyList);
+/* 서버로 못 보낸 기록 자동 재전송 */
+function markPending(id){ const a=getRecords().map(r=>r.id===id?{...r,pending:true}:r); try{ setRecords(a); }catch(e){} }
+function markSent(id){ const a=getRecords().map(r=>r.id===id?{...r,pending:false}:r); try{ setRecords(a); }catch(e){} }
+async function retryPending(){ if(!getServerUrl()) return; const pend=getRecords().filter(r=>r.pending===true); let n=0;
+  for(const r of pend){ try{ await serverPost('submit',{date:r.date,branch:r.branch,name:r.name,place:r.place,type:r.type,count:r.count||1}); markSent(r.id); n++; }catch(e){ break; } }
+  if(n){ toast('못 보낸 기록 '+n+'건을 서버에 다시 보냈습니다'); updateMyMonthStat(); } }
+setTimeout(retryPending, 3000); window.addEventListener('focus', retryPending); setInterval(retryPending, 60000);
+/* 앱을 켜 둔 채 날짜가 바뀌면 활동일자를 오늘로 */
+let _pDay = todayISO();
+setInterval(()=>{ const t=todayISO(); if(t!==_pDay){ if($('f_date').value===_pDay) $('f_date').value=t; _pDay=t; updateMyMonthStat(); } }, 60000);
 
 /* ---------- 관리자 ---------- */
 const DEFAULT_PIN = '1234';
