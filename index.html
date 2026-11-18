@@ -637,6 +637,23 @@ const store = {
 function getRecords(){ return store.get('panel_records', []); }
 function setRecords(r){ store.set('panel_records', r); }
 function setRecordsStrict(r){ localStorage.setItem('panel_records', JSON.stringify(r)); }
+/* 폰 저장공간(약 5MB) 관리 — 사진은 최근 것만 폰에 남기고 오래된 사진은 자동 정리 (건수·기록은 그대로)
+   keepMax: 사진을 남겨 둘 최근 기록 수 · keepDays: 이 날수보다 오래된 기록은 사진 정리 */
+function prunePhotos(all, keepMax, keepDays){
+  keepMax = keepMax==null ? 20 : keepMax; keepDays = keepDays==null ? 14 : keepDays;
+  const cut = Date.now() - keepDays*86400000; let n = 0;
+  const order = all.map((r,i)=>i).sort((a,b)=>(all[b].id||0)-(all[a].id||0));
+  order.forEach((i,rank)=>{ const r = all[i]; if(!(r.photoBefore||r.photoAfter)) return;
+    if(rank >= keepMax || (r.id||0) < cut){ all[i] = { ...r, photoBefore:null, photoAfter:null, photoPruned:true }; n++; } });
+  return n;
+}
+/* 저장 — 공간이 모자라면 오래된 사진부터 단계적으로 정리하고 다시 저장 */
+function saveRecordsSafe(all){
+  try{ setRecordsStrict(all); return 'ok'; }catch(e){}
+  for(const k of [20, 10, 5, 2]){ prunePhotos(all, k, 14); try{ setRecordsStrict(all); return 'pruned'; }catch(e){} }
+  return 'fail';
+}
+try{ const _a = getRecords(); if(prunePhotos(_a, 20, 14)) setRecords(_a); }catch(e){}
 function getRoster(){ return store.get('panel_roster', {}); }
 function setRoster(r){ store.set('panel_roster', r); }
 function getNotice(){ return store.get('panel_notice', null); }
@@ -1046,7 +1063,7 @@ function openReport(id){
     : `<div style="flex:1;min-width:0;">
          <div style="font-size:11.5px;color:var(--sub);margin-bottom:4px;">${label}</div>
          <div style="width:100%;aspect-ratio:1/1;border-radius:10px;border:1.5px dashed #b9c8dd;background:var(--sky);
-              display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--sub);">사진 없음</div>
+              display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--sub);text-align:center;padding:6px;">${r.photoPruned?'오래된 사진이라<br>폰에서 정리됨':'사진 없음'}</div>
        </div>`;
   $('reportBody').innerHTML = `
     <div style="font-size:13px;line-height:1.9;margin-bottom:12px;">
@@ -1080,13 +1097,10 @@ $('btnSubmit').addEventListener('click', async ()=>{
   const photoAfter  = await shrinkImage(photos[1]);
   const rec = { id: Date.now(), date, branch, name, place, type, count, photoBefore, photoAfter };
   const all = getRecords(); all.push(rec);
-  try{
-    setRecordsStrict(all);
-  }catch(e){
-    // 저장공간 초과 시 사진 없이라도 기록은 남깁니다
+  /* 오래된 사진은 자동 정리하고 저장 — 그래도 안 되면(아주 드묾) 이번 기록만 사진 없이 저장. 건수는 서버로 그대로 보냄 */
+  if(saveRecordsSafe(all)==='fail'){
     all[all.length-1] = { ...rec, photoBefore:null, photoAfter:null };
     setRecords(all);
-    toast('저장공간이 부족해 사진 없이 저장했습니다');
   }
   let sentOk = true;
   if(getServerUrl()){
